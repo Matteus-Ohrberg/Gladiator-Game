@@ -11,6 +11,11 @@ import weaponSystem #This module contains all the gear and calculations for the 
 # print(basicEnemyName)
 
 print("Welcome to [Gladiator Game]! You are a gladiator. However, you have forgotten how you became one. ")
-print("Your goal is to defeat as many enemies as you can, Unfortunately there is no end until you lose.")
+print("Your goal is to defeat as many enemies as you can, Unfortunately there is no end until you lose. \n You regain full HP each match.")
+print()
+
+time.sleep(3)
+print("You get told about your first opponent, you are told he is just slightly weaker than you.")
+time.sleep(3)
 
 weaponSystem.basicEnemyCombat()
