@@ -6,6 +6,8 @@ def basicEnemyCombat():
     basicEnemyAttack = ["punch", "tackle", "grab", "counter"]
     basicEnemyHitPoints = 75
     playerHitPoints = 100
+    stunCountPlayer = 0
+    stunCountEnemy = 0
 
     while True:
         print("You have:", playerHitPoints, "HP left!")
@@ -15,42 +17,88 @@ def basicEnemyCombat():
         print("What do you attack with? a punch [1], tackle [2], grab [3] or do you counter? [4]")
         playerAttackChoice = int(input())
 
-        if playerAttackChoice == 4 and enemyChoice == "grab": #TODO ADD A STUN MECHANIC
-            print("You counter your opponent and no-one takes damage")
-        
         #Player attacks here.
-        if playerAttackChoice == 2:
-            damageAgainstEnemy = random.randint(8, 20)
-            selfDamage = random.randint(10, 15)
+        if stunCountPlayer == 0:
+            if playerAttackChoice == 3:
+                if enemyChoice == "grab":
+                    print("You try to grab your opponent, but they counter!")
+                    selfDamage = random.randint(10, 15)
+                    print("Your opponent dealt", selfDamage, "damage towards you!")
 
-            print("You tackle your opponent and take", selfDamage, "damage whilst dealing", damageAgainstEnemy, "!")
+                elif stunCountEnemy == 0:
+                    stunCountEnemy += 2
+                    print("You grab your opponent and stun them for one turn!")
 
-            playerHitPoints -= selfDamage
-            basicEnemyHitPoints -= damageAgainstEnemy
+                else:
+                    print("Your opponent is already stunned!")
 
-            
+            elif playerAttackChoice == 2:
+                damageAgainstEnemy = random.randint(8, 20)
+                selfDamage = random.randint(10, 15)
+
+                print("You tackle your opponent and take", selfDamage, "damage whilst dealing", damageAgainstEnemy, "!")
+
+                playerHitPoints -= selfDamage
+                basicEnemyHitPoints -= damageAgainstEnemy
+
+                
+            else:
+                damageAgainstEnemy = random.randint(5, 15)
+
+                print("You punch your opponent and deal", damageAgainstEnemy, "damage towards them!")
+
+                basicEnemyHitPoints -= damageAgainstEnemy
         else:
-            damageAgainstEnemy = random.randint(5, 15)
-
-            print("You punch your opponent and deal", damageAgainstEnemy, "damage towards them!")
-
-            basicEnemyHitPoints -= damageAgainstEnemy
+            print("You are stunned!")
 
 
 
         #Enemy attacks here.
-        if enemyChoice == "tackle":
-            damageAgainstEnemy = random.randint(10, 15)
-            selfDamage = random.randint(8, 20)
+        if stunCountEnemy == 0:
+            if enemyChoice == "grab":
+                if playerAttackChoice == 4:
+                    print("Your opponents tries to grab you, but you counter!")
+                    damageAgainstEnemy = random.randint(10, 15)
+                    print("You dealt", damageAgainstEnemy, "damage towards them!")
+                    basicEnemyHitPoints -= damageAgainstEnemy
 
-            print("Your opponent tackles you and takes", damageAgainstEnemy, "damage whilst dealing", selfDamage, "!")
 
-            playerHitPoints -= selfDamage
-            basicEnemyHitPoints -= damageAgainstEnemy
+                elif stunCountPlayer == 0:
+                    stunCountPlayer += 2
+                    print("Your opponent has grabbed you! You lose your next turn.")
 
+                else:
+                    print("Your opponent has already stunned you!")
+
+            elif enemyChoice == "tackle":
+                damageAgainstEnemy = random.randint(10, 15)
+                selfDamage = random.randint(8, 20)
+
+                print("Your opponent tackles you and takes", damageAgainstEnemy, "damage whilst dealing", selfDamage, "!")
+
+                playerHitPoints -= selfDamage
+                basicEnemyHitPoints -= damageAgainstEnemy
+
+            else:
+                selfDamage = random.randint(5, 15)
+
+                print("Your opponent punches you and deals", selfDamage, "towards you!")
+
+                playerHitPoints -= selfDamage
         else:
-            selfDamage = random.randint(5, 15)
+            print("Your opponent is stunned!")
 
-            print("Your opponent punches you and deals", selfDamage, "towards you!")
+        if playerHitPoints and basicEnemyHitPoints > 0:
+            if stunCountEnemy > 0:
+                stunCountEnemy -= 1
+            if stunCountPlayer > 0:
+                stunCountPlayer -= 1
 
-            playerHitPoints -= selfDamage
+        elif playerHitPoints <= 0:
+            print("Your HP dropped to zero and you died. Last thing you heard is the jubilations of the spectators.")
+            break
+
+        elif basicEnemyHitPoints <= 0:
+            print("Your opponents HP dropped to zero, and they fall. The spectators applause and jubilations echo")
+            print("throughout the arena, you have won your first battle.")
+            break

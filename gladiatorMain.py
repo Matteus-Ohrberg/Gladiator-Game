@@ -16,6 +16,7 @@ print()
 
 time.sleep(3)
 print("You get told about your first opponent, you are told he is just slightly weaker than you.")
+print("You are both very close together and gauranteed to hit eachother when fighting.")
 time.sleep(3)
 
 weaponSystem.basicEnemyCombat()
