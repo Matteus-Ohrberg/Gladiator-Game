@@ -2,6 +2,7 @@ import time
 import colorama
 import random
 import weaponSystem #This module contains all the gear and calculations for the gear. including player HP
+import SpecializationPick
 
 #TODO: Main combat system (attack, defend, player vs "npc")
 #Lower priority TODO: Menu system (This file should contain menu system), colours, weather.
@@ -16,7 +17,15 @@ print()
 
 time.sleep(3)
 print("You get told about your first opponent, you are told he is just slightly weaker than you.")
-print("You are both very close together and gauranteed to hit eachother when fighting.")
+print("You are both very similar and garaunteed to hit eachother when fighting. The first match is a fight to the death.")
 time.sleep(3)
 
 weaponSystem.basicEnemyCombat()
+
+time.sleep(1.5)
+print("Congrats on winning the first match.")
+
+time.sleep(1)
+print("Next you will choose your weapon specialisation. The weapon you specialise in will increase stats")
+SpecializationPick.specializationPick()
+weaponSystem.weaponry()
