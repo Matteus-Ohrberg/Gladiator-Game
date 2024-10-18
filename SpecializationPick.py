@@ -10,6 +10,7 @@ import time
 
 def specializationPick():
     time.sleep(1.5)
+    global weapon
 
     print("You can choose from the following categories' weapons (Stat changes will be previewed):")
     while True: #The code below asks the user to pick a category of weapons, then a weapon. The stats of the picked weapon
@@ -32,11 +33,19 @@ def specializationPick():
                 print("Pick this weapon? Yes [1] or No [2]")
                 confirm = int(input())
                 if confirm == 1:
-                    spear = 1
-                    return spear
+                    weapon = "Spear"
+                    return weapon
+                else:
+                    continue
 
             elif WeaponChoiceCat == 2:
                 print("stats")
+                
+                print("Pick this weapon? Yes [1] or No [2]")
+                confirm = int(input())
+                if confirm == 1:
+                    weapon = "Trident"
+                    return weapon
 
         
         elif CategoryChoice == 2:

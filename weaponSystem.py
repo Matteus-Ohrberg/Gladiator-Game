@@ -111,6 +111,7 @@ def basicEnemyCombat(): #sorry about the lack of comments, basic system is "pick
 
 
 def weaponry():
-    tester = SpecializationPick.specializationPick
-    if tester == 1:
-        print("test successful")
+    if SpecializationPick.weapon == "Spear":
+        print("Spear is chosen")
+    elif SpecializationPick.weapon == "Trident":
+        print("Trident is chosen")
