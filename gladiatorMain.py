@@ -8,11 +8,20 @@ import os
 
 init(autoreset=True)
 
-SpecializationPick.specializationPicker()
-while True:
-    playerCombat.PlayerCombat()
-    time.sleep(2)
-    os.system('cls')
+os.system('cls')
 
-# while weaponSystem.loopBreak == False:
-#     weaponSystem.PlayerCombat()
+playerCombat.difficultySelect()
+
+playerCombat.enemyChoiceFunc()
+SpecializationPick.specializationPicker()
+
+playerCombat.playerHitpoints = 100
+playerCombat.enemyHitpoints = 100
+
+while True:
+    print("Player HP:", playerCombat.playerHitpoints)
+    print("Enemy HP:", playerCombat.enemyHitpoints)
+    playerCombat.PlayerCombat()
+    playerCombat.enemyCombat()
+    input("Enter to continue")
+    os.system('cls')
