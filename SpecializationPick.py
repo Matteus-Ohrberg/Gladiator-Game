@@ -155,7 +155,7 @@ def specializationPicker():
                 print()
                 print(colorama.Fore.GREEN + "Massive increase in accuracy")
                 print(colorama.Fore.RED + "Massive decrease in damage")
-                print(colorama.Fore.RED + "Small decrease in range")
+                print(colorama.Fore.RED + "Low range")
                 print(colorama.Fore.YELLOW + "If you surrender, the audience WILL grant you mercy")
                 print("Equip this weapon? Yes [1] or No [2]")
                 weaponConfirm = int(input())
