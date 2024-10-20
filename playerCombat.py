@@ -49,6 +49,79 @@ def difficultySelect():
     difficulty = int(input())
 
 
+def armorPicker(): 
+    global playerArmor
+    HasArmorBeenPicked = False
+
+    while HasArmorBeenPicked == False: #Copy pasted loop from above #As of OCT 20, loop does not work
+        os.system('cls')
+        print("Remember: You cannot change armor until the dev adds a way!")
+        print("Armors: None [1], Leather [2], Chainmail [3], Full-plate [4], Magic [5]")
+        print("Note: This only reduces damage by 10 percent per level and doesn't change any descriptions")
+        
+        armorPick = int(input())
+
+        if armorPick == 1:
+            os.system('cls')
+            print("Confirm No armor? Yes [1], No [2]")
+            confirmPick = int(input())
+
+            if confirmPick == 1:
+                playerArmor = 1
+                HasArmorBeenPicked = not HasArmorBeenPicked
+            
+            else:
+                continue
+        
+        if armorPick == 2:
+            os.system('cls')
+            print("Confirm Leather armor? Yes [1], No [2]")
+            confirmPick = int(input())
+
+            if confirmPick == 1:
+                playerArmor = 0.9
+                HasArmorBeenPicked = not HasArmorBeenPicked
+            
+            else:
+                continue
+        
+        if armorPick == 3:
+            os.system('cls')
+            print("Confirm Chainmail armor? Yes [1], No [2]")
+            confirmPick = int(input())
+
+            if confirmPick == 1:
+                playerArmor = 0.8
+                HasArmorBeenPicked = not HasArmorBeenPicked
+            
+            else:
+                continue
+        
+        if armorPick == 4:
+            os.system('cls')
+            print("Confirm Full-plate armor? Yes [1], No [2]")
+            confirmPick = int(input())
+
+            if confirmPick == 1:
+                playerArmor = 0.7
+                HasArmorBeenPicked = not HasArmorBeenPicked
+            
+            else:
+                continue
+        
+        if armorPick == 5:
+            os.system('cls')
+            print("Confirm Magic armor? Yes [1], No [2]")
+            confirmPick = int(input())
+
+            if confirmPick == 1:
+                playerArmor = 0.6
+                HasArmorBeenPicked = not HasArmorBeenPicked
+            
+            else:
+                continue
+
+
 def enemyChoiceFunc(): # This has to be the worst way to do random armor for enemies
     global enemyWeapon
     global enemyArmor
@@ -154,6 +227,7 @@ def PlayerCombat():
     global playerHitpoints
     global enemyHitpoints
     global loopBreak
+    global playerSurrender
     attackDamage = 0
 
     if playerStun == 0:
@@ -172,7 +246,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You thrust your spear at your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards them!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards them!")
                     
                     elif attackChoice == 1 and accuracyCheck <= 34:
                         print("You try to hit your opponent, but you miss!")
@@ -213,12 +287,15 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = not playerSurrender
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            attackDamage -= 100
+                    else:
+                        print()
 
                 elif distance > 4:
                     print("Throw Spear [1], Step Forward [2]")
@@ -231,7 +308,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You aim your spear and throw it towards your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                     
                     elif attackChoice == 1 and accuracyCheck <= 39:
                         print("You threw your spear but missed!")
@@ -239,6 +316,9 @@ def PlayerCombat():
                     elif attackChoice == 2:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
 
 
             
@@ -253,7 +333,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You thrust the trident at your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards them!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards them!")
 
                     elif attackChoice == 1 and accuracyCheck <= 49:
                         print("Your attack on the opponent misses!")
@@ -300,6 +380,9 @@ def PlayerCombat():
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
                             playerHitpoints -= 100
+                    
+                    else:
+                        print()
 
                 elif distance > 4:
                     print("Step Forward [1]")
@@ -309,6 +392,9 @@ def PlayerCombat():
                     if attackChoice == 1:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
 
 
         #BLADES~~--~~**~~--~~BLADES~~--~~**~~--~~BLADES~~--~~**~~--~~BLADES~~--~~**~~--~~BLADES~~--~~**~~--~~BLADES~~--~~**~~--~~BLADES#
@@ -324,7 +410,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You slowly swing your longsword at your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                     
                     elif attackChoice == 1 and accuracyCheck <= 59:
                         print("Your opponent dodges your slow swing!")
@@ -371,6 +457,9 @@ def PlayerCombat():
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
                             playerHitpoints -= 100
+                    
+                    else:
+                        print()
 
                 elif distance > 3:
                     print("Step Forward [1]")
@@ -380,6 +469,9 @@ def PlayerCombat():
                     if attackChoice == 1:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
             
             elif SpecializationPick.chosenWeapon == 2:
                 if distance <= 2:
@@ -392,7 +484,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You swing your sword at your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                     
                     if attackChoice == 1 and accuracyCheck <= 39:
                         print("You miss your opponent!")
@@ -439,6 +531,9 @@ def PlayerCombat():
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
                             playerHitpoints -= 100
+
+                    else:
+                        print()
                 
                 elif distance > 2:
                     print("Step Forward [1]")
@@ -448,6 +543,9 @@ def PlayerCombat():
                     if attackChoice == 1:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
 
             elif SpecializationPick.chosenWeapon == 3:
                 if distance <= 1:
@@ -464,7 +562,7 @@ def PlayerCombat():
                             attackDamage = attackRoll * enemyArmor
                         print()
                         print("You stab your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                     
                     elif attackChoice == 1 and accuracyCheck <= 19:
                         print("Your opponent dodges!")
@@ -511,6 +609,9 @@ def PlayerCombat():
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
                             playerHitpoints -= 100
+                    
+                    else:
+                        print()
                 
                 elif distance > 2:
                     print("Throw Dagger [1], Step Forward [2]")
@@ -523,7 +624,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You throw your dagger towards your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
 
                     elif attackChoice == 1 and accuracyCheck <= 29:
                         print("You miss the dagger throw.")
@@ -531,6 +632,9 @@ def PlayerCombat():
                     elif attackChoice == 2:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
         
 
         #BLUNTS~~--~~**~~--~~BLUNTS~~--~~**~~--~~BLUNTS~~--~~**~~--~~BLUNTS~~--~~**~~--~~BLUNTS~~--~~**~~--~~BLUNTS~~--~~**~~--~~BLUNTS#
@@ -546,7 +650,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You swing your mace at the opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                         if enemyStun == 0:
                             stunChance = random.randint(1, 10)
                             if stunChance <= 4:
@@ -600,6 +704,9 @@ def PlayerCombat():
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
                             playerHitpoints -= 100
+                        
+                    else:
+                        print()
                 
                 elif distance > 2:
                     print("Step Forward [1]")
@@ -609,6 +716,9 @@ def PlayerCombat():
                     if attackChoice == 1:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
             
             elif SpecializationPick.chosenWeapon == 2:
                 if distance <= 2:
@@ -621,7 +731,7 @@ def PlayerCombat():
                         attackDamage = attackRoll
                         print()
                         print("You swing your flail at your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                         if enemyStun == 0:
                             stunChance = random.randint(1, 10)
                             if stunChance <= 4:
@@ -675,6 +785,9 @@ def PlayerCombat():
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
                             playerHitpoints -= 100
+                    
+                    else:
+                        print()
                 
                 elif distance > 2:
                     print("Step Forward [1]")
@@ -684,6 +797,9 @@ def PlayerCombat():
                     if attackChoice == 1:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
 
 
         #OTHER~~--~~**~~--~~OTHER~~--~~**~~--~~OTHER~~--~~**~~--~~OTHER~~--~~**~~--~~OTHER~~--~~**~~--~~OTHER~~--~~**~~--~~OTHER~~--~~OTHER#
@@ -699,7 +815,7 @@ def PlayerCombat():
                         attackDamage = attackRoll * enemyArmor
                         print()
                         print("You punch your opponent!")
-                        print(colorama.Fore.GREEN, "You deal:", attackDamage, "damage towards your opponent!")
+                        print(colorama.Fore.GREEN + "You deal:", attackDamage, "damage towards your opponent!")
                     
                     elif attackChoice == 1 and accuracyCheck <= 9:
                         print("Your opponent looks confused as to why you are using fists to fight! (Miss!)")
@@ -735,6 +851,9 @@ def PlayerCombat():
                         time.sleep(1.5)
                         print("The audience decides to let you live.")
                         loopBreak = not loopBreak
+
+                    else:
+                        print()
                 
                 elif distance > 1:
                     print("Step Forward [1]")
@@ -744,6 +863,9 @@ def PlayerCombat():
                     if attackChoice == 1:
                         print("You step towards your opponent")
                         distance -= 1
+                    
+                    else:
+                        print()
 
     elif playerStun > 0:
         print("You are stunned!")
@@ -753,7 +875,7 @@ def PlayerCombat():
                 enemyHitpoints -= attackDamage
         
         else:
-            enemyHitpoints -= attackDamage
+            enemyHitpoints -= attackDamage * enemyArmor
     
     else:
         print()
@@ -782,7 +904,7 @@ def enemyCombat():
                     attackRoll = random.randint(12, 16)
                     attackDamage = attackRoll * playerArmor
                     print("The opponent attacks you with their spear!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
                 
                 elif attackChoice == 1 and accuracyCheck <= 34:
                     print("Your opponent misses!")
@@ -827,7 +949,7 @@ def enemyCombat():
                         attackRoll = random.randint(2, 8)
                         attackDamage = attackRoll * enemyArmor
                     print("The opponent stabs you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
                 
                 elif attackChoice == 1 and accuracyCheck <= 19:
                     print("Your opponent misses!")
@@ -867,7 +989,7 @@ def enemyCombat():
                     attackRoll = random.randint(8, 12)
                     attackDamage = attackRoll * enemyArmor
                     print("Your opponent swings their sword you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
 
                 elif attackChoice == 1 and accuracyCheck <= 39:
                     print("Your opponent swings their sword at you and miss!")
@@ -899,7 +1021,7 @@ def enemyCombat():
                     attackRoll = random.randint(25, 35)
                     attackDamage = attackRoll * enemyArmor
                     print("Your opponent slowly swings their longsword at you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
 
                 elif attackChoice == 1 and accuracyCheck <= 59:
                     print("Your opponent swings their longsword at you and miss!")
@@ -931,7 +1053,7 @@ def enemyCombat():
                     attackRoll = random.randint(8, 12)
                     attackDamage = attackRoll * enemyArmor
                     print("Your opponent swings their mace at you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
                     if playerStun == 0:
                         stunChance = random.randint(1, 10)
                         if stunChance <= 4:
@@ -968,7 +1090,7 @@ def enemyCombat():
                     attackRoll = random.randint(18, 22)
                     attackDamage = attackRoll * enemyArmor
                     print("Your opponent flings their flail at you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
                     if playerStun == 0:
                         stunChance = random.randint(1, 10)
                         if stunChance <= 4:
@@ -1005,7 +1127,7 @@ def enemyCombat():
                     attackRoll = random.randint(16, 20)
                     attackDamage = attackRoll * enemyArmor
                     print("Your opponent thrusts their trident into you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
 
                 elif attackChoice == 1 and accuracyCheck <= 49:
                     print("Your thrusts their trident at you and miss!")
@@ -1037,7 +1159,7 @@ def enemyCombat():
                     attackRoll = random.randint(1, 3)
                     attackDamage = attackRoll * enemyArmor
                     print("Your opponent punches you!")
-                    print(colorama.Fore.RED, "They dealt:", attackDamage, "damage towards you!")
+                    print(colorama.Fore.RED + "They dealt:", attackDamage, "damage towards you!")
 
                 elif attackChoice == 1 and accuracyCheck <= 9:
                     print("Your opponent attempts to punch you and miss!")

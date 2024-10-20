@@ -10,7 +10,7 @@ def specializationPicker():
     global chosenWeapon   #By doing this, I will not have to call upon a function each time I want to check stats.
     HasWeaponBeenPicked = False
 
-    while HasWeaponBeenPicked == False: #While loop to allow stat showcase and confirmation of weapon pick.
+    while HasWeaponBeenPicked == False: #While loop to allow stat showcase and confirmation of weapon pick. #As of OCT 20, loop does not work
         os.system('cls')
         print("Remember: You cannot change weapon until the dev adds a way!")
         print("Categories: Spears [1], Blades [2], Blunt Weaponry [3], Other [4]")
@@ -36,6 +36,9 @@ def specializationPicker():
                     chosenCategory = 1
                     chosenWeapon = 1
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
             
             elif weaponChoicePick == 2:
                 os.system('cls')
@@ -51,6 +54,9 @@ def specializationPicker():
                     chosenCategory = 1
                     chosenWeapon = 2
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
         
 ######################################################################################### Unpleasant, seperates categories neatly.
         elif categoryChoicePick == 2:
@@ -73,6 +79,9 @@ def specializationPicker():
                     chosenCategory = 2
                     chosenWeapon = 1
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
             
             elif weaponChoicePick == 2:
                 os.system('cls')
@@ -88,6 +97,9 @@ def specializationPicker():
                     chosenCategory = 2
                     chosenWeapon = 2
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
             
             elif weaponChoicePick == 3:
                 os.system('cls')
@@ -104,6 +116,9 @@ def specializationPicker():
                     chosenCategory = 2
                     chosenWeapon = 3
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
 
 ######################################################################################### Unpleasant, seperates categories neatly.
         elif categoryChoicePick == 3:
@@ -126,6 +141,9 @@ def specializationPicker():
                     chosenCategory = 3
                     chosenWeapon = 1
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
             
             elif weaponChoicePick == 2:
                 os.system('cls')
@@ -142,6 +160,9 @@ def specializationPicker():
                     chosenCategory = 3
                     chosenWeapon = 2
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
             
 ######################################################################################### Unpleasant, seperates categories neatly.
         elif categoryChoicePick == 4:
@@ -164,3 +185,8 @@ def specializationPicker():
                     chosenCategory = 4
                     chosenWeapon = 1
                     HasWeaponBeenPicked = not HasWeaponBeenPicked
+                
+                else:
+                    continue
+        else:
+                    continue
