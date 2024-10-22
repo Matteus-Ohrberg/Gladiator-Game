@@ -41,6 +41,8 @@ enemyStun = 0
 global loopBreak
 loopBreak = False
 
+global playerSurrenderDamageCheck
+
 def difficultySelect():
     global difficulty
     print("Select difficulty, each level increases the likelyhood of enemy getting better armor.")
@@ -228,6 +230,7 @@ def PlayerCombat():
     global enemyHitpoints
     global loopBreak
     global playerSurrender
+    global playerSurrenderDamageCheck
     attackDamage = 0
 
     if playerStun == 0:
@@ -269,7 +272,7 @@ def PlayerCombat():
                     elif attackChoice == 0:
                         print("You yell out that you surrender!")
                         time.sleep(1.5)
-                        surrenderScore = 0 #Surrender score is so far only affected by HP.
+                        surrenderScore = 0
 
                         if playerHitpoints > enemyHitpoints:
                             print("The audience seems surprised! They thought that you were in the lead.")
@@ -283,17 +286,18 @@ def PlayerCombat():
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
                         YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        YeaOrNay + surrenderScore #Shitty surrender system, just RNG based.
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
 
-                            playerSurrender = not playerSurrender
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            attackDamage -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
                     else:
                         print()
 
@@ -374,12 +378,14 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
                     
                     else:
                         print()
@@ -451,12 +457,14 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
                     
                     else:
                         print()
@@ -525,12 +533,14 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
 
                     else:
                         print()
@@ -603,12 +613,14 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
                     
                     else:
                         print()
@@ -698,12 +710,14 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
                         
                     else:
                         print()
@@ -779,12 +793,14 @@ def PlayerCombat():
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
-                            loopBreak = not loopBreak
+
+                            playerSurrender = True
                         else:
                             print("The audience decides that you shall die.")
                             time.sleep(2)
                             print("Your opponent surprises you, killing you.")
-                            playerHitpoints -= 100
+                            playerSurrenderDamageCheck = True
+                            attackDamage = 100
                     
                     else:
                         print()
@@ -838,19 +854,9 @@ def PlayerCombat():
                     elif attackChoice == 0:
                         print("You yell out that you surrender!")
                         time.sleep(1.5)
-
-                        if playerHitpoints > enemyHitpoints:
-                            print("The audience seems surprised! They thought that you were in the lead.")
-
-                        elif playerHitpoints < enemyHitpoints:
-                            print("The audience does not seem surprised, as you have fallen behind your opponent")
-                        
-                        else:
-                            print("The audience is confused! As both you and your opponent seem equal in the fight so far")
-                        
-                        time.sleep(1.5)
                         print("The audience decides to let you live.")
-                        loopBreak = not loopBreak
+
+                        playerSurrender = True
 
                     else:
                         print()
@@ -869,8 +875,12 @@ def PlayerCombat():
 
     elif playerStun > 0:
         print("You are stunned!")
+    
     if attackDamage > 0:
-        if SpecializationPick.chosenCategory == 3:
+        if playerSurrenderDamageCheck == True:
+            playerHitpoints -= attackDamage
+
+        elif SpecializationPick.chosenCategory == 3:
             if SpecializationPick.chosenWeapon == 2:
                 enemyHitpoints -= attackDamage
         

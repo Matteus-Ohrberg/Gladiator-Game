@@ -34,14 +34,19 @@ os.system('cls')
 if modeSelect == 1: #Endless mode.
     
     print("Select your equipment specialization.") #Starts with allowing player to select weapon and armor
+    print()
     input("Press enter to continue")
     SpecializationPick.specializationPicker()
     playerCombat.armorPicker()
     os.system('cls')
 
     roundCount = 1
+    playerCombat.playerSurrenderDamageCheck = False
 
     while True: #While loop that starts with setting player HP to 100 and enemy to 25 times the round number, divided in half
+
+        if playerCombat.playerHitpoints <= 0:
+            break
 
         playerCombat.playerHitpoints = 100
         playerCombat.enemyHitpoints = 25 * (roundCount / 2)
@@ -53,12 +58,21 @@ if modeSelect == 1: #Endless mode.
 
             print("You have:", playerCombat.playerHitpoints, "HP left")
             print("Your opponent has:", playerCombat.enemyHitpoints, "HP left")
+
             playerCombat.PlayerCombat()
-            playerCombat.enemyCombat()
+            if playerCombat.playerSurrender == True:
+                    os.system('cls')
+                    print("You surrendered.")
+                    break       
+            elif playerCombat.playerSurrenderDamageCheck == False:
+                playerCombat.enemyCombat()
+           
             input("Press enter to continue")
             os.system('cls')
 
+
             if playerCombat.playerHitpoints <= 0:
+
                 print("As your enemy hits you, you fall to the ground.")
                 time.sleep(1)
                 print("The skies begin to blacken.")
@@ -69,29 +83,8 @@ if modeSelect == 1: #Endless mode.
                 break
 
             elif playerCombat.enemyHitpoints <= 0:
-                if playerCombat.playerSurrender == True:
-                    print("You surrendered.")
-                    break
-                else:
-                    print("You hit your opponent a final time, they proceed to fall.")
-                    time.sleep(1)
-                    print(colorama.Fore.GREEN + "Opponent HP hit zero! You win!")
-                    roundCount += 1
-                    break
-
-
-
-
-
-
-
-# playerCombat.playerHitpoints = 100
-# playerCombat.enemyHitpoints = 100
-
-# while True:
-#     print("Player HP:", playerCombat.playerHitpoints)
-#     print("Enemy HP:", playerCombat.enemyHitpoints)
-#     playerCombat.PlayerCombat()
-#     playerCombat.enemyCombat()
-#     input("Enter to continue")
-#     os.system('cls')
+                print("You hit your opponent a final time, they proceed to fall.")
+                time.sleep(1)
+                print(colorama.Fore.GREEN + "Opponent HP hit zero! You win!")
+                roundCount += 1
+                break
