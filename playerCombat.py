@@ -7,14 +7,12 @@ import os
 
 init(autoreset=True) #Will reset colour after every line
 
-#########################TODO: COMBAT SYSTEM.
-
-global difficulty # Lists used for (in order, top to bottom,) "ai" weapon choice, "ai" armor choice, and difficulty.
+global difficulty # Lists used for: "ai" weapon choice, "ai" armor choice, and difficulty.
 global weaponList
 global armorList
 weaponList = ["Spear", "Trident", "Longsword", "Shortsword", "Dagger", "Mace", "Flail", "Fists"]
 # armorList = ["None", "leather", "Chainmail", "FullPlate", "Magic"]
-# difficultyList = [1, 0.9, 0.8, 0.7, 0,6]
+# difficultyList = [1, 0,9, 0.8, 0.7, 0,6]
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ armorList and difficultyList are unused, use it to understand my thought process maybe.
 
 
@@ -285,8 +283,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore #Shitty surrender system, just RNG based.
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore #Shitty surrender system, just RNG based.
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
@@ -373,8 +371,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
@@ -452,8 +450,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
@@ -528,8 +526,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
@@ -608,8 +606,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
@@ -705,8 +703,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
@@ -788,8 +786,8 @@ def PlayerCombat():
                         else:
                             print("The audience is confused! As both you and your opponent seem equal in the fight so far")
                         
-                        YeaOrNay = random.randint(1, 10)
-                        YeaOrNay + surrenderScore
+                        surrenderRNG = random.randint(1, 10)
+                        YeaOrNay = surrenderRNG + surrenderScore
                         time.sleep(1.5)
                         if YeaOrNay >= 6:
                             print("The audience decides to let you live.")
