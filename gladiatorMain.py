@@ -80,6 +80,7 @@ if modeSelect == 1: #Endless mode.
                 print("And you die.")
                 time.sleep(2)
                 print(colorama.Fore.RED + "Player HP hit zero! You lose!")
+                print(colorama.Fore.YELLOW + "Round reached:", roundCount)
                 break
 
             elif playerCombat.enemyHitpoints <= 0:
