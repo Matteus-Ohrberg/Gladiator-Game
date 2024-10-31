@@ -1,12 +1,17 @@
 import time
 import colorama
 import random
-import playerCombat
-import SpecializationPick
+import playerCombat # For all things combat. And endless mode
+import SpecializationPick # Originally this module was created to keep playerCombat short in length, it did not work.
 from colorama import init
 import os
 
+import SetMatches # Enemy ""AI"" in this module for set matches.
+import setMatchesCombat # Better combat made for set matches mode.
+
 init(autoreset=True)
+
+setMatchesCombat.weaponPickSetMatches()
 
 os.system('cls')
 
@@ -22,17 +27,16 @@ print("Endless is a mode that will not end until you lose, HP is reset every rou
 print("Endless increases enemy HP per round, increasing until it becomes impossible to win.")
 print()
 print("Set-matches is 10 matches in increasing difficulty.")
+print("Set-matches is also somewhat more fleshed out")
 modeSelect = int(input())
-
-os.system('cls')
-
-playerCombat.difficultySelect()
 
 os.system('cls')
 
 
 if modeSelect == 1: #Endless mode.
-    
+
+    playerCombat.difficultySelect()
+    os.system('cls')
     print("Select your equipment specialization.") #Starts with allowing player to select weapon and armor
     print()
     input("Press enter to continue")
@@ -89,3 +93,22 @@ if modeSelect == 1: #Endless mode.
                 print(colorama.Fore.GREEN + "Opponent HP hit zero! You win!")
                 roundCount += 1
                 break
+
+
+
+
+elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjoy.
+     
+    print("Select your equipment specialization.") #Starts with allowing player to select weapon and armor
+    print()
+    input("Press enter to continue")
+    # SpecializationPick.specializationPicker()
+    # playerCombat.armorPicker()
+    os.system('cls')
+
+
+    # print("") write something about the opponent
+    setMatchesCombat.stageCounter = 1
+    while True:
+
+        setMatchesCombat.enemyhp

@@ -43,7 +43,7 @@ global playerSurrenderDamageCheck
 
 def difficultySelect():
     global difficulty
-    print("Select difficulty, each level increases the likelyhood of enemy getting better armor.")
+    print("Select enemy armour, each level increases the likelyhood of enemy getting better armor.")
     print("(Damage reduction per armor level is 10 percent)")
     print("Easy [1], Normal [2], Difficult [3], Hard [4], Unfair [5]")
     difficulty = int(input())
