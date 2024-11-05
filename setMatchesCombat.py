@@ -13,9 +13,10 @@ global enemyHitpoints # There is also a higher than likely chance that I am usin
 global distance # It works however, which is nice.
 global stunPlayer
 global stunEnemy
-global weaponSetMatches
+global weaponSetMatches # I do not remember why I added this.
 global reloadTime
 global blockingEnemy
+global onePunchMan
 
 
 enemyHitpoints = 100 # Set to 100 in order to prevent potential bugs (and to allow modification elsewhere.)
@@ -25,6 +26,9 @@ distance = 10 # Distance 10 by default, will probably be modified per battle.
 chosenWeapon = "Fists"
 reloadTime = 0 # Reload time for the ranged weapons.
 blockingEnemy = 1 # Used in damage calculation.
+onePunchMan = 1
+
+# stunPlayer = 0 # Will probably be used.
 
 
 
@@ -243,56 +247,370 @@ def playerSetCombat():
     global enemyHitpoints
     global blockingEnemy
     global distance
+    global reloadTime
+    global onePunchMan
     accuracyCheck = random.randint(1, 100)
 
     if chosenWeapon == "Longbow":
-        if distance > 3:
-            print("Attack [1], Step back [2]")
+        if reloadTime == 0:
+            if distance > 3:
+                print("You are:", distance * 2, "meters away from your opponent! (Longbow active)")
+                print("Attack [1], Step back [2]")
+                print()
+                attackChoice = int(input())
+
+                if attackChoice == 1 and accuracyCheck <= 65:
+                    attackDamage = random.randint(15, 25)
+
+                    print("You aim at your opponent while drawing your bow, shooting the arrow!")
+                    print("You deal", attackDamage, "to your opponent")
+                    reloadTime += 1
+                    
+                elif attackChoice == 1 and accuracyCheck > 65:
+                    print("You missed your attack!")
+                    reloadTime += 1
+                    
+                else:
+                    print("You go towards your opponent!")
+                    distance -= 1
+            
+            elif distance <= 3:
+                print("You are:", distance * 2, "meters away from your opponent! (Dagger active)")
+                print("Attack [1], Block [2], Step forward [3]")
+                print()
+                attackChoice = int(input())
+
+                if attackChoice == 1 and accuracyCheck <= 75:
+                    attackDamage = random.randint(6, 12)
+
+                    print("You stab your opponent!")
+                    print("You deal", attackDamage, "to your opponent")
+                    
+                elif attackChoice == 1 and accuracyCheck > 75:
+                    print("You missed your attack!")
+
+                elif attackChoice == 2:
+                    print("You block your opponents attack!")
+                    blockingEnemy = 0.2
+                    
+                else:
+                    print("You back away from your opponent!")
+                    distance += 1
+        
+        else:
+            print("You are readying your longbow for the next shot!", reloadTime, "turns left!") 
+
+
+    elif chosenWeapon == "Shortbow":
+        if reloadTime == 0:
+            if distance > 3:
+                print("You are:", distance * 2, "meters away from your opponent! (Shortbow active)")
+                print("Attack [1], Step back [2]")
+                print()
+                attackChoice = int(input())
+
+                if attackChoice == 1 and accuracyCheck <= 65:
+                    attackDamage = random.randint(10, 18)
+
+                    print("You aim at your opponent while drawing your bow, shooting the arrow!")
+                    print("You deal", attackDamage, "to your opponent")
+                    
+                elif attackChoice == 1 and accuracyCheck > 65:
+                    print("You missed your attack!")
+                    
+                else:
+                    print("You go towards your opponent!")
+                    distance -= 1
+            
+            if distance <= 3:
+                print("You are:", distance * 2, "meters away from your opponent! (Dagger active)")
+                print("Attack [1], Block [2], Step forward [3]")
+                print()
+                attackChoice = int(input())
+
+                if attackChoice == 1 and accuracyCheck <= 75:
+                    attackDamage = random.randint(6, 12)
+
+                    print("You stab your opponent!")
+                    print("You deal", attackDamage, "to your opponent")
+                    
+                elif attackChoice == 1 and accuracyCheck > 75:
+                    print("You missed your attack!")
+
+                elif attackChoice == 2:
+                    print("You block your opponents attack!")
+                    blockingEnemy = 0.2
+                    
+                else:
+                    print("You back away from your opponent!")
+                    distance += 1
+        
+        else:
+            print("You are readying your shortbow for the next shot!", reloadTime, "turns left!")
+    
+
+    elif chosenWeapon == "Crossbow":
+        if reloadTime == 0:
+            if distance > 3:
+                print("You are:", distance * 2, "meters away from your opponent! (Crossbow active)")
+                print("Attack [1], Step back [2]")
+                print()
+                attackChoice = int(input())
+
+                if attackChoice == 1 and accuracyCheck <= 75:
+                    attackDamage = random.randint(20, 32)
+
+                    print("You aim at your opponent and shoot the arrow!")
+                    print("You deal", attackDamage, "to your opponent")
+                    reloadTime += 2
+                    
+                elif attackChoice == 1 and accuracyCheck > 75:
+                    print("You missed your attack!")
+                    reloadTime += 2
+                    
+                else:
+                    print("You go towards your opponent!")
+                    distance -= 1
+            
+            elif distance <= 3:
+                print("You are:", distance * 2, "meters away from your opponent! (Dagger active)")
+                print("Attack [1], Block [2], Step forward [3]")
+                print()
+                attackChoice = int(input())
+
+                if attackChoice == 1 and accuracyCheck <= 75:
+                    attackDamage = random.randint(6, 12)
+
+                    print("You stab your opponent!")
+                    print("You deal", attackDamage, "to your opponent")
+                    
+                elif attackChoice == 1 and accuracyCheck > 75:
+                    print("You missed your attack!")
+
+                elif attackChoice == 2:
+                    print("You block your opponents attack!")
+                    blockingEnemy = 0.2
+                    
+                else:
+                    print("You back away from your opponent!")
+                    distance += 1
+        
+        else:
+            print("You are readying your shortbow for the next shot!", reloadTime, "turns left!")
+
+
+    elif chosenWeapon == "Spear":
+        if distance <= 3:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Attack [1], Block [2] Step back [3]")
             print()
             attackChoice = int(input())
 
             if attackChoice == 1 and accuracyCheck <= 65:
-                attackDamage = random.randint(15, 25)
+                attackDamage = random.randint(10, 18)
 
-                print("You aim at your opponent while drawing your bow, shooting the arrow!")
+                print("You stab at your opponent!")
                 print("You deal", attackDamage, "to your opponent")
-                
+                    
             elif attackChoice == 1 and accuracyCheck > 65:
                 print("You missed your attack!")
-                
-            else:
-                print("You go towards your opponent!")
-                distance -= 1
-        
-        if distance <= 3:
-            print("Attack [1], Block [2], Step forward [3]")
-            attackChoice = int(input())
 
-            if attackChoice == 1 and accuracyCheck <= 75:
-                attackDamage = random.randint(6, 12)
-
-                print("You stab your opponent!")
-                print("You deal", attackDamage, "to your opponent")
-                
-            elif attackChoice == 1 and accuracyCheck > 65:
-                print("You missed your attack!")
-                
+            elif attackChoice == 2:
+                print("You block your opponents attack!")
+                blockingEnemy = 0.2
+                    
             else:
                 print("You back away from your opponent!")
                 distance += 1
+            
+        elif distance > 3:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Throw [1], Step forward [2]")
+            print()
+            attackChoice = int(input())
 
-    elif chosenWeapon == "Shortbow":
-    
-    elif chosenWeapon == "Crossbow":
-    
-    elif chosenWeapon == "Spear":
+            if attackChoice == 1 and accuracyCheck <= 65:
+                attackDamage = random.randint(10, 18)
+
+                print("You throw your spear at the opponent!")
+                print("You deal", attackDamage, "to your opponent")
+                    
+            elif attackChoice == 1 and accuracyCheck > 65:
+                print("You missed your attack!")
+                    
+            else:
+                print("You step towards your opponent!")
+                distance -= 1
+
     
     elif chosenWeapon == "Trident":
+        if distance <= 3:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Attack [1], Block [2] Step back [3]")
+            print()
+            attackChoice = int(input())
+
+            if attackChoice == 1 and accuracyCheck <= 65:
+                attackDamage = random.randint(20, 25)
+
+                print("You stab at your opponent!")
+                print("You deal", attackDamage, "to your opponent")
+                    
+            elif attackChoice == 1 and accuracyCheck > 65:
+                print("You missed your attack!")
+
+            elif attackChoice == 2:
+                print("You block your opponents attack!")
+                blockingEnemy = 0.2
+                    
+            else:
+                print("You back away from your opponent!")
+                distance += 1
+            
+        elif distance > 3:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Step forward [1]")
+            print()
+            attackChoice = int(input())
+
+            print("You step towards your opponent")
+            distance -= 1
+           
     
     elif chosenWeapon == "Longsword":
+        if distance <= 2:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Attack [1], Block [2] Step back [3]")
+            print()
+            attackChoice = int(input())
+
+            if attackChoice == 1 and accuracyCheck <= 55:
+                attackDamage = random.randint(23, 28)
+
+                print("You swing at your opponent!")
+                print("You deal", attackDamage, "to your opponent")
+                    
+            elif attackChoice == 1 and accuracyCheck > 55:
+                print("You missed your attack!")
+
+            elif attackChoice == 2:
+                print("You block your opponents attack!")
+                blockingEnemy = 0.2
+                    
+            else:
+                print("You back away from your opponent!")
+                distance += 1
+            
+        elif distance > 2:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Step forward [1]")
+            print()
+            attackChoice = int(input())
+
+            print("You step towards your opponent")
+            distance -= 1
     
+
     elif chosenWeapon == "Shortsword":
+        if distance <= 2:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Attack [1], Block [2] Step back [3]")
+            print()
+            attackChoice = int(input())
+
+            if attackChoice == 1 and accuracyCheck <= 65:
+                attackDamage = random.randint(10, 18)
+
+                print("You swing at your opponent!")
+                print("You deal", attackDamage, "to your opponent")
+                    
+            elif attackChoice == 1 and accuracyCheck > 65:
+                print("You missed your attack!")
+
+            elif attackChoice == 2:
+                print("You block your opponents attack!")
+                blockingEnemy = 0.2
+                    
+            else:
+                print("You back away from your opponent!")
+                distance += 1
+            
+        elif distance > 2:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Step forward [1]")
+            print()
+            attackChoice = int(input())
+
+            print("You step towards your opponent")
+            distance -= 1
+
     
     elif chosenWeapon == "Dagger":
+        if distance <= 2:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Attack [1], Block [2] Step back [3]")
+            print()
+            attackChoice = int(input())
+
+            if attackChoice == 1 and accuracyCheck <= 90:
+                attackDamage = random.randint(10, 18)
+
+                print("You stab your opponent!")
+                print("You deal", attackDamage, "to your opponent")
+                    
+            elif attackChoice == 1 and accuracyCheck > 90:
+                print("You missed your attack!")
+
+            elif attackChoice == 2:
+                print("You block your opponents attack!")
+                blockingEnemy = 0.2
+                    
+            else:
+                print("You back away from your opponent!")
+                distance += 1
+            
+        elif distance > 2:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Step forward [1]")
+            print()
+            attackChoice = int(input())
+
+            print("You step towards your opponent")
+            distance -= 1
     
     elif chosenWeapon == "Fists":
+        if distance <= 1:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Punch [1], Block [2] ,Step back [3]")
+            print()
+            attackChoice = int(input())
+
+            if attackChoice == 1 and accuracyCheck <= 99:
+                attackDamage = random.randint(3, 7)
+
+                print("You punch at your opponent!")
+                print("You deal", attackDamage ** onePunchMan, "to your opponent")
+                onePunchMan += 1
+                    
+            elif attackChoice == 1 and accuracyCheck > 99:
+                print("You missed your attack!")
+
+            elif attackChoice == 2:
+                print("You block your opponents attack!")
+                blockingEnemy = 0.2
+                    
+            else:
+                print("You back away from your opponent!")
+                distance += 1
+            
+        elif distance > 1:
+            print("You are:", distance * 2, "meters away from your opponent!")
+            print("Step forward [1]")
+            print()
+            attackChoice = int(input())
+
+            print("You step towards your opponent")
+            distance -= 1
+    
+
+    enemyHitpoints -= attackDamage ** onePunchMan
