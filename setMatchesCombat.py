@@ -26,7 +26,7 @@ distance = 10 # Distance 10 by default, will probably be modified per battle.
 chosenWeapon = "Fists"
 reloadTime = 0 # Reload time for the ranged weapons.
 blockingEnemy = 1 # Used in damage calculation.
-onePunchMan = 1
+onePunchMan = 1 # I trained every day for 3 years, I became so strong I went bald.
 
 # stunPlayer = 0 # Will probably be used.
 
@@ -249,26 +249,26 @@ def playerSetCombat():
     global distance
     global reloadTime
     global onePunchMan
-    accuracyCheck = random.randint(1, 100)
+    accuracyCheck = random.randint(1, 100) # Accuracy checks for attacks.
 
-    if chosenWeapon == "Longbow":
-        if reloadTime == 0:
-            if distance > 3:
+    if chosenWeapon == "Longbow": # If you read this, you should probably understand the rest of the weapons.
+        if reloadTime == 0: # Applies to bows only, if this is higher than 0 then tell player they're reloading
+            if distance > 3: # if distance is more than 3, do the stuff below
                 print("You are:", distance * 2, "meters away from your opponent! (Longbow active)")
                 print("Attack [1], Step back [2]")
                 print()
-                attackChoice = int(input())
+                attackChoice = int(input()) # Asks user for a choice
 
-                if attackChoice == 1 and accuracyCheck <= 65:
-                    attackDamage = random.randint(15, 25)
+                if attackChoice == 1 and accuracyCheck <= 65: # If player has chosen to attack and accuracyCheck is 65 or below
+                    attackDamage = random.randint(15, 25) # Do the following amount of damage
 
                     print("You aim at your opponent while drawing your bow, shooting the arrow!")
                     print("You deal", attackDamage, "to your opponent")
-                    reloadTime += 1
+                    reloadTime += 1 # If player attacks, add +1 to reload time.
                     
                 elif attackChoice == 1 and accuracyCheck > 65:
                     print("You missed your attack!")
-                    reloadTime += 1
+                    reloadTime += 1 # As above.
                     
                 else:
                     print("You go towards your opponent!")
@@ -291,7 +291,7 @@ def playerSetCombat():
 
                 elif attackChoice == 2:
                     print("You block your opponents attack!")
-                    blockingEnemy = 0.2
+                    blockingEnemy = 0.2 # Blocking is set to 0.2, reducing damage taken by 80% for the next attack by enemy.
                     
                 else:
                     print("You back away from your opponent!")
@@ -400,7 +400,7 @@ def playerSetCombat():
 
 
     elif chosenWeapon == "Spear":
-        if distance <= 3:
+        if distance <= 3: # Reversed from bows. If distance is equal to or less than 3, print normal "menu"
             print("You are:", distance * 2, "meters away from your opponent!")
             print("Attack [1], Block [2] Step back [3]")
             print()
@@ -432,7 +432,7 @@ def playerSetCombat():
             if attackChoice == 1 and accuracyCheck <= 65:
                 attackDamage = random.randint(10, 18)
 
-                print("You throw your spear at the opponent!")
+                print("You throw your spear at the opponent!") # No reload times on spears, Though that might be unwise.
                 print("You deal", attackDamage, "to your opponent")
                     
             elif attackChoice == 1 and accuracyCheck > 65:
@@ -590,7 +590,7 @@ def playerSetCombat():
 
                 print("You punch at your opponent!")
                 print("You deal", attackDamage ** onePunchMan, "to your opponent")
-                onePunchMan += 1
+                onePunchMan += 0.3 # In order to make fists viable, I have made them exponentially better. Difficult early match.
                     
             elif attackChoice == 1 and accuracyCheck > 99:
                 print("You missed your attack!")
@@ -613,4 +613,4 @@ def playerSetCombat():
             distance -= 1
     
 
-    enemyHitpoints -= attackDamage ** onePunchMan
+    enemyHitpoints -= attackDamage ** onePunchMan # This calculation wont interfere normal damage calculations, as oPM is set to 1.
