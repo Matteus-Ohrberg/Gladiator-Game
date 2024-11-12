@@ -16,6 +16,7 @@ global stunEnemy
 global weaponSetMatches # I do not remember why I added this.
 global reloadTime
 global blockingEnemy
+global blockingPlayer
 global onePunchMan
 
 
@@ -26,6 +27,7 @@ distance = 10 # Distance 10 by default, will probably be modified per battle.
 chosenWeapon = "Fists"
 reloadTime = 0 # Reload time for the ranged weapons.
 blockingEnemy = 1 # Used in damage calculation.
+blockingPlayer = 1
 onePunchMan = 1 # I trained every day for 3 years, I became so strong I went bald.
 
 # stunPlayer = 0 # Will probably be used.
@@ -243,6 +245,8 @@ def weaponPickSetMatches(): # Basically specializationPick module but modified f
                 continue
 
 def playerSetCombat():
+    hitDetect = False # To make sure a calculation doesn't run with a nil value.
+    global blockingPlayer
     global chosenWeapon
     global enemyHitpoints
     global blockingEnemy
@@ -265,6 +269,7 @@ def playerSetCombat():
                     print("You aim at your opponent while drawing your bow, shooting the arrow!")
                     print("You deal", attackDamage, "to your opponent")
                     reloadTime += 1 # If player attacks, add +1 to reload time.
+                    hitDetect = True
                     
                 elif attackChoice == 1 and accuracyCheck > 65:
                     print("You missed your attack!")
@@ -285,6 +290,7 @@ def playerSetCombat():
 
                     print("You stab your opponent!")
                     print("You deal", attackDamage, "to your opponent")
+                    hitDetect = True
                     
                 elif attackChoice == 1 and accuracyCheck > 75:
                     print("You missed your attack!")
@@ -314,6 +320,7 @@ def playerSetCombat():
 
                     print("You aim at your opponent while drawing your bow, shooting the arrow!")
                     print("You deal", attackDamage, "to your opponent")
+                    hitDetect = True
                     
                 elif attackChoice == 1 and accuracyCheck > 65:
                     print("You missed your attack!")
@@ -333,6 +340,7 @@ def playerSetCombat():
 
                     print("You stab your opponent!")
                     print("You deal", attackDamage, "to your opponent")
+                    hitDetect = True
                     
                 elif attackChoice == 1 and accuracyCheck > 75:
                     print("You missed your attack!")
@@ -363,6 +371,7 @@ def playerSetCombat():
                     print("You aim at your opponent and shoot the arrow!")
                     print("You deal", attackDamage, "to your opponent")
                     reloadTime += 2
+                    hitDetect = True
                     
                 elif attackChoice == 1 and accuracyCheck > 75:
                     print("You missed your attack!")
@@ -380,6 +389,7 @@ def playerSetCombat():
 
                 if attackChoice == 1 and accuracyCheck <= 75:
                     attackDamage = random.randint(6, 12)
+                    hitDetect = True
 
                     print("You stab your opponent!")
                     print("You deal", attackDamage, "to your opponent")
@@ -411,6 +421,7 @@ def playerSetCombat():
 
                 print("You stab at your opponent!")
                 print("You deal", attackDamage, "to your opponent")
+                hitDetect = True
                     
             elif attackChoice == 1 and accuracyCheck > 65:
                 print("You missed your attack!")
@@ -434,6 +445,7 @@ def playerSetCombat():
 
                 print("You throw your spear at the opponent!") # No reload times on spears, Though that might be unwise.
                 print("You deal", attackDamage, "to your opponent")
+                hitDetect = True
                     
             elif attackChoice == 1 and accuracyCheck > 65:
                 print("You missed your attack!")
@@ -455,6 +467,7 @@ def playerSetCombat():
 
                 print("You stab at your opponent!")
                 print("You deal", attackDamage, "to your opponent")
+                hitDetect = True
                     
             elif attackChoice == 1 and accuracyCheck > 65:
                 print("You missed your attack!")
@@ -489,6 +502,7 @@ def playerSetCombat():
 
                 print("You swing at your opponent!")
                 print("You deal", attackDamage, "to your opponent")
+                hitDetect = True
                     
             elif attackChoice == 1 and accuracyCheck > 55:
                 print("You missed your attack!")
@@ -523,6 +537,7 @@ def playerSetCombat():
 
                 print("You swing at your opponent!")
                 print("You deal", attackDamage, "to your opponent")
+                hitDetect = True
                     
             elif attackChoice == 1 and accuracyCheck > 65:
                 print("You missed your attack!")
@@ -591,6 +606,7 @@ def playerSetCombat():
                 print("You punch at your opponent!")
                 print("You deal", attackDamage ** onePunchMan, "to your opponent")
                 onePunchMan += 0.3 # In order to make fists viable, I have made them exponentially better. Difficult early match.
+                hitDetect = True
                     
             elif attackChoice == 1 and accuracyCheck > 99:
                 print("You missed your attack!")
@@ -612,5 +628,6 @@ def playerSetCombat():
             print("You step towards your opponent")
             distance -= 1
     
-
-    enemyHitpoints -= attackDamage ** onePunchMan # This calculation wont interfere normal damage calculations, as oPM is set to 1.
+    if hitDetect == True: # To ensure the calculation below doesn't run with a nil value assigned.
+        enemyHitpoints -= (attackDamage ** onePunchMan) * blockingPlayer # This calculation wont interfere normal damage calculations, as oPM is set to 1.
+    blockingPlayer = 1
