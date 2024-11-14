@@ -25,7 +25,7 @@ print("Select a gamemode: Endless [1], set-matches [2]")
 print("Endless is a mode that will not end until you lose, HP is reset every round.")
 print("Endless increases enemy HP per round, increasing until it becomes impossible to win.")
 print()
-print("Set-matches is 10 matches in increasing difficulty.")
+print("Set-matches is 5 matches in increasing difficulty.")
 print("Set-matches is also a tiny bit more fleshed out, albeit basically the same.")
 modeSelect = int(input())
 
@@ -121,7 +121,7 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
     print("You were given a handful of images of the opponents you were fighting, aswell as having your own picture taken.")
     print()
     print("The first opponent is a humanoid cat named Alexios, they're mostly dark grey with some green markings on their head.")
-    time.sleep(4)
+    time.sleep(5)
     os.system('cls')
 
     print("A few days later . . .")
@@ -130,13 +130,13 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
 
     print("You step into the arena, seeing your opponent on the other side of it.")
     time.sleep(3)
-    print("An announcer yells out for the fight to begin.")
+    print("An announcer yells out for the match to begin.")
     time.sleep(3)
 
 
     setMatchesCombat.playerHitpoints = 100
     setMatchesCombat.enemyHitpoints = 60
-    while True:
+    while True: # ALEXIOS BATTLE
         os.system('cls')
         print("You have:", setMatchesCombat.playerHitpoints, "HP Remaining!")
         print("Alexios has:", setMatchesCombat.enemyHitpoints, "HP Remaining!")
@@ -154,7 +154,7 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
         else: # If playerHP is not above 0, do death.
             print("You fall over, your eyes quicky darkening. The last thing you hear is the announcer calling out Alexios win.")
             time.sleep(3)
-            print("You lose! Restart the game to try again.")
+            print("You lose! Restart the game to try again. (CTRL + C)")
             time.sleep(86400) # To make the player restart the game, or wait 24 hours.
         
 
@@ -172,4 +172,61 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
     time.sleep(2)
     print("You reluctantly head back to the arena the following week for the next fight.")
     time.sleep(2)
-    print("Your opponent this time is ") # I've got no idea. I plan on having the final fight be basically just Ainz from Overlord.
+    print("Your opponent this time doesn't seem to stay in your mind.")
+    print("Their appearance is not notable.")
+    print("The only thing you can remember is that they're noted for their skills with a sword.")
+    time.sleep(5)
+
+    os.system('cls')
+    print("As you enter the Arena you spot what you assume to be your opponent.")
+    print("You look up and spot a massive compass")
+    time.sleep(1)
+    print("And as quickly as you spot your opponent, they dissappear out of view.")
+    time.sleep(3)
+    print("The announcer calls out for the match to begin.")
+
+
+    setMatchesCombat.playerHitpoints = 120
+    setMatchesCombat.enemyHitpoints = 100
+    while True: # ANTIMEMETICS BATTLE
+        os.system('cls')
+        print("You have:", setMatchesCombat.playerHitpoints, "HP Remaining!")
+        print("The Opponent has:", setMatchesCombat.enemyHitpoints, "HP Remaining!")
+        print()
+    
+        
+        if setMatchesCombat.playerHitpoints > 0:
+            if SetMatches.playerLocation == SetMatches.enemyLocation: # if both enemy and player is at same location value, player is able to fight.
+
+                if setMatchesCombat.reloadTime == 0:
+                    setMatchesCombat.playerSetCombat()
+                    input("Enter to continue")
+                
+                elif setMatchesCombat.reloadTime > 0:
+                    print("You are reloading your", setMatchesCombat.chosenWeapon, "!")
+                    setMatchesCombat.reloadTime -= 1
+                    time.sleep(1)
+            
+            else:
+                print("You cannot find your opponent!")
+                print("Where do you move to? North [1], East [2], South [3], West [4]?")
+                SetMatches.playerLocation = int(input())
+        
+        else:
+                print("You fall over, your eyes quicky darkening. You are unsure as to why this is happening.")
+                time.sleep(3)
+                print("You lose! Restart the game to try again. (CTRL + C)")
+                time.sleep(86400)
+        
+
+        if setMatchesCombat.enemyHitpoints > 0:
+            SetMatches.antimemes()
+            input("Enter to continue")
+
+        else:
+            print("Your opponent falls over, and the announcer proclaims your victory")
+            print("You look at the corpse of your opponent, seemingly unable to keep attention on it.")
+            print("But as soon as you look away, the thought of the opponent erases itself from your mind.")
+            time.sleep(6)
+            os.system('cls')
+            break

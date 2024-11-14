@@ -68,3 +68,72 @@ def alexiosOmorfan(): # Fuck you, Alexios. # Alexios should have 60 HP ? # Alexi
     if hitDetect == True:
         setMatchesCombat.playerHitpoints -= attackDamage * setMatchesCombat.blockingEnemy
     setMatchesCombat.blockingEnemy = 1
+
+# Location is a variable to keep track of cardinal directions. 1 is north, 2 is east, 3 is south, 4 is west.
+global enemyLocation
+enemyLocation = 2
+
+global playerLocation
+playerLocation = 1
+
+def antimemes():
+    global enemyLocation
+    hitDetect = False
+    accuracyCheck = random.randint(1, 100)
+    locationMove = random.randint(1, 20)
+
+    if setMatchesCombat.distance <= 2:
+        attackChoice = random.randint(1, 4) # 1 and 2 for attack, 3 is for block, 4 is for move back.
+
+        if attackChoice == 1 or 2 and accuracyCheck <= 70: #I realised Alexios' code is unoptimised, oops.
+            attackDamage = random.randint(15, 40)
+            print("Your opponent hits you with their sword!")
+            print("The opponent damages you for:", attackDamage, "HP!")
+            hitDetect = True
+        
+        elif attackChoice == 3:
+            print("Your opponent blocks your next attack!")
+            setMatchesCombat.blockingPlayer = 0.2
+        
+        elif attackChoice == 4:
+            print("Your opponent seems to back away!")
+            setMatchesCombat.distance += 1
+    
+    if setMatchesCombat.distance > 2:
+        attackChoice = random.randint(1, 4) # 1 is for location, 2 and above is for moving closer
+
+        if attackChoice == 1: # CAUTION FOR HUMAN EYES: HORRIBLE CODE BELOW
+            if enemyLocation == 1 and locationMove < 11: # If north (1) and locMove below 11, go west (4)
+                enemyLocation = 4
+            
+            elif enemyLocation == 1 and locationMove > 10: # If north (1) and locMove more than 10, go east (2)
+                enemyLocation = 2
+            
+            elif enemyLocation == 2 and locationMove < 11: # If east (2), and locMove below 11, go north (1)
+                enemyLocation = 1
+            
+            elif enemyLocation == 2 and locationMove > 10: # If east (2), and locMove more than 10, go south (3)
+                enemyLocation = 3
+            
+            elif enemyLocation == 3 and locationMove < 11: # if south (3), and locMove below 11, go east (2)
+                enemyLocation = 2
+            
+            elif enemyLocation == 3 and locationMove > 10: # If south (3), and locMove more than 10, go west (4)
+                enemyLocation = 4
+            
+            elif enemyLocation == 4 and locationMove < 11: # If west (4), and locMove below 11, go south (3)
+                enemyLocation = 3
+            
+            elif enemyLocation == 4 and locationMove > 10: # If west (4), and locMove more than 10, go north (1)
+                enemyLocation = 1
+            
+            print("You feel that your opponent has moved location!!")
+        
+
+        elif attackChoice > 1:
+            print("Your opponent seems to get closer!")
+            setMatchesCombat.distance -= 1
+    
+    if hitDetect == True:
+        setMatchesCombat.playerHitpoints -= attackDamage * setMatchesCombat.blockingEnemy
+    setMatchesCombat.blockingEnemy = 1
