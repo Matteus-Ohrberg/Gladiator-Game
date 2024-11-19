@@ -34,7 +34,7 @@ def alexiosOmorfan(): # Fuck you, Alexios. # Alexios should have 60 HP ? # Alexi
         elif attackChoice == 2: # Scratch / claw
             if accuracyCheck <= 55:
                 attackDamage = random.randint(5, 23) # Random Damage, but riskier.
-                print("Alexios claws your", random.choice(bodyParts) + "!")
+                print("Alexios claws your ", random.choice(bodyParts) + "!")
                 print("Alexios damages you for", attackDamage, "HP!")
                 hitDetect = True
             
@@ -86,7 +86,7 @@ def antimemes():
         attackChoice = random.randint(1, 4) # 1 and 2 for attack, 3 is for block, 4 is for move back.
 
         if attackChoice == 1 or 2 and accuracyCheck <= 70: #I realised Alexios' code is unoptimised, oops.
-            attackDamage = random.randint(15, 40)
+            attackDamage = random.randint(5, 25)
             print("Your opponent hits you with their sword!")
             print("The opponent damages you for:", attackDamage, "HP!")
             hitDetect = True
@@ -99,7 +99,7 @@ def antimemes():
             print("Your opponent seems to back away!")
             setMatchesCombat.distance += 1
     
-    if setMatchesCombat.distance > 2:
+    elif setMatchesCombat.distance > 2:
         attackChoice = random.randint(1, 4) # 1 is for location, 2 and above is for moving closer
 
         if attackChoice == 1: # CAUTION FOR HUMAN EYES: HORRIBLE CODE BELOW

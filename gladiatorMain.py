@@ -25,7 +25,7 @@ print("Select a gamemode: Endless [1], set-matches [2]")
 print("Endless is a mode that will not end until you lose, HP is reset every round.")
 print("Endless increases enemy HP per round, increasing until it becomes impossible to win.")
 print()
-print("Set-matches is 5 matches in increasing difficulty.")
+print("Set-matches is 2 matches in increasing difficulty.")
 print("Set-matches is also a tiny bit more fleshed out, albeit basically the same.")
 modeSelect = int(input())
 
@@ -172,6 +172,7 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
     time.sleep(2)
     print("You reluctantly head back to the arena the following week for the next fight.")
     time.sleep(2)
+    print()
     print("Your opponent this time doesn't seem to stay in your mind.")
     print("Their appearance is not notable.")
     print("The only thing you can remember is that they're noted for their skills with a sword.")
@@ -186,8 +187,8 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
     print("The announcer calls out for the match to begin.")
 
 
-    setMatchesCombat.playerHitpoints = 120
-    setMatchesCombat.enemyHitpoints = 100
+    setMatchesCombat.playerHitpoints = 150
+    setMatchesCombat.enemyHitpoints = 250
     while True: # ANTIMEMETICS BATTLE
         os.system('cls')
         print("You have:", setMatchesCombat.playerHitpoints, "HP Remaining!")
@@ -230,3 +231,13 @@ elif modeSelect == 2: #Premade battles, with heavy inspiration from media I enjo
             time.sleep(6)
             os.system('cls')
             break
+    
+    print("You walk out of the arena and realise you have gold in your pocket, you have no idea as to why.")
+    print("A thought comes to your head as who your next opponent will be.")
+    time.sleep(3.5)
+    print("You hear a voice in your head: ''the deity of this world has run out of ideas and will now end the game''")
+    time.sleep(3)
+    print("Lightning strikes you! Dealing 20 000 000 damage!")
+    setMatchesCombat.playerHitpoints -= 20000000
+    print("You have:", setMatchesCombat.playerHitpoints, "HP remaining!")
+    time.sleep(6)
